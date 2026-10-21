@@ -1,1 +1,1845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
+    <!-- Google AdSense -->
+    <meta name="google-adsense-account" content="ca-pub-7963880628277539">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7963880628277539" crossorigin="anonymous"></script>
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PGR4Y0TVNP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-PGR4Y0TVNP');
+    </script>
+  
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tesla Roadster 2026 · McGregor Air Stunt VR Simulation</title>
+<meta name="color-scheme" content="dark light">
+<style>
+:root {
+  --bg: #07090d;
+  --fg: #f2f5f8;
+  --ac: #e82127;
+  --cy: #38bdf8;
+  --pn: rgba(10, 14, 20, 0.86);
+  --bd: rgba(255, 255, 255, 0.14);
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+*, *::before, *::after { box-sizing: inherit; }
+html, body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  overflow: hidden;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Inter", sans-serif;
+  user-select: none;
+  -webkit-user-select: none;
+}
+canvas { display: block; width: 100%; height: 100%; }
+
+/* Modal Launch Screen */
+#ui {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(94vw, 520px);
+  max-height: 92vh;
+  overflow-y: auto;
+  background: var(--pn);
+  color: var(--fg);
+  padding: 24px 26px;
+  border-radius: 18px;
+  border: 1px solid var(--bd);
+  text-align: center;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), 0 0 40px rgba(232, 33, 39, 0.12);
+  z-index: 30;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cy);
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+h1 {
+  margin: 0 0 6px;
+  font-size: clamp(20px, 4vw, 25px);
+  letter-spacing: 0.1em;
+  font-weight: 800;
+}
+h1 b { color: var(--ac); }
+p {
+  margin: 8px 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: rgba(242, 245, 248, 0.88);
+}
+.stunt-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin: 14px 0;
+  text-align: left;
+}
+.stunt-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 11px 12px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+.stunt-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+.stunt-card.active {
+  background: rgba(232, 33, 39, 0.16);
+  border-color: var(--ac);
+  box-shadow: 0 0 14px rgba(232, 33, 39, 0.25);
+}
+.stunt-card .sc-num {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ac);
+  text-transform: uppercase;
+}
+.stunt-card .sc-title {
+  font-size: 13px;
+  font-weight: 700;
+  margin: 2px 0 4px;
+  color: #fff;
+}
+.stunt-card .sc-desc {
+  font-size: 11px;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.72);
+}
+.specs-bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 8px 12px;
+  margin: 10px 0 14px;
+  font-size: 11px;
+}
+.spec-item b {
+  display: block;
+  font-size: 13px;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+.spec-item span {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+button {
+  background: var(--ac);
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 11px 16px;
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.15s ease, opacity 0.15s ease;
+}
+button:hover:not(:disabled) { transform: translateY(-1px); filter: brightness(1.08); }
+button:active:not(:disabled) { transform: translateY(0); }
+button.s {
+  background: #1f2630;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+button.s:hover:not(:disabled) { background: #2a3340; }
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* Top HUD Controls Bar */
+#topbar {
+  position: fixed;
+  top: calc(12px + env(safe-area-inset-top, 0px));
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  pointer-events: none;
+  z-index: 15;
+}
+.hud-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  pointer-events: auto;
+}
+.chip {
+  background: rgba(10, 14, 20, 0.78);
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 7px 11px;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.chip.active {
+  background: rgba(232, 33, 39, 0.85);
+  border-color: #ff5a5f;
+  color: #fff;
+}
+
+/* Starship-style Broadcast Telemetry Overlay */
+#telemetry {
+  position: fixed;
+  left: 16px;
+  bottom: calc(44px + env(safe-area-inset-bottom, 0px));
+  width: min(320px, calc(100vw - 32px));
+  background: rgba(8, 12, 18, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-left: 3px solid var(--ac);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  color: #dce6f2;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  pointer-events: none;
+  z-index: 12;
+}
+.tel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--cy);
+  margin-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 4px;
+}
+.tel-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px 10px;
+}
+.tel-row {
+  display: flex;
+  justify-content: space-between;
+}
+.tel-row span { color: rgba(255, 255, 255, 0.55); }
+.tel-row b { color: #fff; font-variant-numeric: tabular-nums; }
+.bar-wrap {
+  margin-top: 6px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #38bdf8, #e82127);
+  transition: width 0.08s linear;
+}
+
+/* Bottom status prompt */
+#t {
+  position: fixed;
+  bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+  pointer-events: none;
+  z-index: 12;
+}
+
+@media (max-width: 560px) {
+  .stunt-grid { grid-template-columns: 1fr; }
+  #telemetry { width: 250px; font-size: 10px; bottom: 40px; }
+}
+</style>
+</head>
+<body>
+
+<div id="topbar">
+  <div class="hud-group">
+    <button id="menuBtn" class="chip" title="Open Event Menu">☰ EVENT MENU</button>
+    <button id="stunt1Btn" class="chip active">DEMO 01 · 170° ARCH CLIMB &amp; ROLL</button>
+    <button id="stunt2Btn" class="chip">DEMO 02 · 5-TESLA THRUSTER KICKFLIP</button>
+  </div>
+  <div class="hud-group">
+    <button id="launchBtn" class="chip active">🚀 LAUNCH STUNT (SPACE)</button>
+    <button id="camBtn" class="chip">CAM: COCKPIT SEAT</button>
+    <button id="timeBtn" class="chip">TIME: MCGREGOR NIGHT</button>
+    <button id="muteBtn" class="chip">AUDIO: ON</button>
+  </div>
+</div>
+
+<div id="telemetry">
+  <div class="tel-head">
+    <span>SPACEX MCGREGOR · LIVE TELEMETRY</span>
+    <span id="telMode">STANDBY</span>
+  </div>
+  <div class="tel-grid">
+    <div class="tel-row"><span>SPEED</span><b id="telSpd">0 MPH</b></div>
+    <div class="tel-row"><span>ALTITUDE</span><b id="telAlt">0.0 FT</b></div>
+    <div class="tel-row"><span>PITCH / ROLL</span><b id="telAtt">0° / 0°</b></div>
+    <div class="tel-row"><span>G-FORCE</span><b id="telG">1.0 G</b></div>
+    <div class="tel-row"><span>DOWNFORCE</span><b id="telDf">0 KG</b></div>
+    <div class="tel-row"><span>COPV TANK</span><b id="telPsi">5,500 PSI</b></div>
+  </div>
+  <div class="bar-wrap"><div id="psiBar" class="bar-fill"></div></div>
+</div>
+
+<div id="ui">
+  <div class="badge">OCTOBER 15, 2026 · SPACEX MCGREGOR, TEXAS</div>
+  <h1>ROADSTER <b>2026</b> · AIR STUNT VR</h1>
+  <p>Sit inside the Ultrawhite &amp; carbon-fiber cockpit of the <b>Rocket-Spec Roadster</b> from the McGregor reveal. Experience the <b>2G underbody suction fan</b> and <b>10 SpaceX cold-gas COPV thrusters (80 kN · Mach diamonds)</b> across both signature demos:</p>
+
+  <div class="stunt-grid">
+    <div class="stunt-card active" data-stunt="1" id="card1">
+      <div class="sc-num">DEMO 01</div>
+      <div class="sc-title">170° Inverted Arch</div>
+      <div class="sc-desc">4,700 kg fan suction up the 68-ft wall, inverted drop, mid-air roll &amp; 3.3G cold-gas thruster landing on the clear runway.</div>
+    </div>
+    <div class="stunt-card" data-stunt="2" id="card2">
+      <div class="sc-num">DEMO 02</div>
+      <div class="sc-title">5-Tesla Kickflip</div>
+      <div class="sc-desc">Pure cold-gas thruster vertical lift-off from flat ground, 360° thruster roll over the 13.5-ft Semi &amp; fleet, and thruster landing.</div>
+    </div>
+  </div>
+
+  <div class="specs-bar">
+    <div class="spec-item"><b>0.81 s</b><span>0–60 MPH</span></div>
+    <div class="spec-item"><b>5,500 PSI</b><span>600L COPV AIR</span></div>
+    <div class="spec-item"><b>80 kN</b><span>10 THRUSTERS</span></div>
+    <div class="spec-item"><b>4,700 kg</b><span>2G FAN SUCTION</span></div>
+  </div>
+
+  <p style="font-size:12px; opacity:0.75">VR Trigger, <b>Spacebar</b>, or <b>Launch button</b> starts each run · Drag to look around the 3-screen cockpit · Press <b>C</b> to switch cameras.</p>
+
+  <div class="btn-row">
+    <button id="vrb" disabled>CHECKING VR…</button>
+    <button id="go" class="s">PLAY ON SCREEN</button>
+    <button id="cf" class="s">COMFORT VIGNETTE: ON</button>
+  </div>
+</div>
+
+<div id="t"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ============================================================================
+// TESLA ROADSTER 2026 · SPACEX MCGREGOR REVEAL VR SIMULATION
+// Authentic recreation of Demo 01 & Demo 02 from the Oct 15, 2026 McGregor Event
+// ============================================================================
+const R = 9.8, H = 1.08, G = 9.81, L0 = -26, PI = Math.PI;
+const X = new THREE.Vector3(1, 0, 0), Y = new THREE.Vector3(0, 1, 0), Z = new THREE.Vector3(0, 0, 1);
+
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x0b101b, 0.0011);
+
+const cam = new THREE.PerspectiveCamera(72, innerWidth / innerHeight, 0.05, 2400);
+const rig = new THREE.Group();
+scene.add(rig);
+
+// Camera mount group allows switching between Cockpit Driver Seat, Hood Cam, and Chase Cam
+const camMount = new THREE.Group();
+rig.add(camMount);
+camMount.add(cam);
+rig.position.set(0, H, 0);
+
+const ren = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+ren.setPixelRatio(Math.min(devicePixelRatio, 2));
+ren.setSize(innerWidth, innerHeight);
+ren.xr.enabled = true;
+ren.outputEncoding = THREE.sRGBEncoding;
+ren.toneMapping = THREE.ACESFilmicToneMapping;
+ren.toneMappingExposure = 1.05;
+ren.shadowMap.enabled = true;
+ren.shadowMap.type = THREE.PCFSoftShadowMap;
+ren.xr.setReferenceSpaceType('local');
+document.body.appendChild(ren.domElement);
+
+// ---------- Helper texture & geometry builders ----------
+function tex(w, h, fn) {
+  const c = document.createElement('canvas');
+  c.width = w;
+  c.height = h;
+  fn(c.getContext('2d'), w, h);
+  const t = new THREE.CanvasTexture(c);
+  t.encoding = THREE.sRGBEncoding;
+  t.wrapS = t.wrapT = THREE.RepeatWrapping;
+  return t;
+}
+const M = (c, m = 0.25, r = 0.55, e = 0, ei = 1) =>
+  new THREE.MeshStandardMaterial({ color: c, metalness: m, roughness: r, emissive: e || 0, emissiveIntensity: ei });
+const B = (w, h, d, mat, x, y, z, p = scene) => {
+  const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+  m.position.set(x, y, z);
+  p.add(m);
+  if (p === scene) m.castShadow = m.receiveShadow = true;
+  return m;
+};
+
+// ---------- Lighting & Sky (McGregor Night Floodlit Reveal + Golden Dusk Toggle) ----------
+const hemiLight = new THREE.HemisphereLight(0x8ab4f8, 0x2a241e, 0.45);
+scene.add(hemiLight);
+
+const sun = new THREE.DirectionalLight(0xdbeafe, 1.65);
+sun.position.set(90, 145, 35);
+sun.target.position.set(20, 0, -55);
+scene.add(sun, sun.target);
+sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048);
+Object.assign(sun.shadow.camera, { left: -140, right: 140, top: 140, bottom: -140, near: 10, far: 460 });
+sun.shadow.bias = -0.0004;
+sun.shadow.normalBias = 0.05;
+
+// Stadium Floodlight Spotlights on Demo 01 and Demo 02 pads
+const padLight1 = new THREE.PointLight(0xeef6ff, 2.3, 150, 1.5);
+padLight1.position.set(-14, 34, -10);
+scene.add(padLight1);
+
+const padLight2 = new THREE.PointLight(0xeef6ff, 2.3, 160, 1.5);
+padLight2.position.set(54, 34, -55);
+scene.add(padLight2);
+
+function makeSkyTexture(nightMode) {
+  return tex(16, 512, (g, w, h) => {
+    const r = g.createLinearGradient(0, 0, 0, h);
+    if (nightMode) {
+      [[0, '#03060c'], [0.28, '#081226'], [0.46, '#142848'], [0.5, '#2b3954'], [0.53, '#1e1916'], [1, '#090807']].forEach(a => r.addColorStop(a[0], a[1]));
+    } else {
+      [[0, '#163b73'], [0.3, '#3b6ea8'], [0.46, '#d99b66'], [0.5, '#f2c17d'], [0.53, '#8c6d46'], [1, '#3d3022']].forEach(a => r.addColorStop(a[0], a[1]));
+    }
+    g.fillStyle = r;
+    g.fillRect(0, 0, w, h);
+  });
+}
+
+let isNight = true;
+const skyT = makeSkyTexture(true);
+skyT.wrapS = skyT.wrapT = THREE.ClampToEdgeWrapping;
+const dome = new THREE.Mesh(
+  new THREE.SphereGeometry(1700, 32, 16),
+  new THREE.MeshBasicMaterial({ map: skyT, side: THREE.BackSide, fog: false, depthWrite: false })
+);
+dome.renderOrder = -2;
+scene.add(dome);
+
+const glow = tex(128, 128, g => {
+  const r = g.createRadialGradient(64, 64, 0, 64, 64, 64);
+  r.addColorStop(0, 'rgba(255,250,235,1)');
+  r.addColorStop(0.16, 'rgba(190,225,255,0.75)');
+  r.addColorStop(1, 'rgba(120,180,255,0)');
+  g.fillStyle = r;
+  g.fillRect(0, 0, 128, 128);
+});
+const sunSpr = new THREE.Sprite(new THREE.SpriteMaterial({ map: glow, blending: THREE.AdditiveBlending, fog: false, depthWrite: false }));
+sunSpr.position.set(220, 380, -650);
+sunSpr.scale.set(260, 260, 1);
+scene.add(sunSpr);
+
+{
+  const pm = new THREE.PMREMGenerator(ren), es = new THREE.Scene();
+  es.add(dome.clone(), sunSpr.clone());
+  scene.environment = pm.fromScene(es, 0).texture;
+  pm.dispose();
+}
+
+// Starfield for Texas night sky
+{
+  const sg = new THREE.BufferGeometry();
+  const sp = new Float32Array(1200 * 3);
+  for (let i = 0; i < 1200; i++) {
+    const th = Math.random() * PI * 2;
+    const ph = Math.random() * PI * 0.46;
+    const d = 1450;
+    sp[i * 3] = Math.cos(th) * Math.sin(ph) * d;
+    sp[i * 3 + 1] = Math.cos(ph) * d;
+    sp[i * 3 + 2] = Math.sin(th) * Math.sin(ph) * d;
+  }
+  sg.setAttribute('position', new THREE.BufferAttribute(sp, 3));
+  const stars = new THREE.Points(sg, new THREE.PointsMaterial({ color: 0xe2ecff, size: 2.2, fog: false }));
+  scene.add(stars);
+}
+
+// ---------- SpaceX McGregor Test Site World ----------
+const texasGroundTex = tex(256, 256, (g, w, h) => {
+  g.fillStyle = '#363028';
+  g.fillRect(0, 0, w, h);
+  for (let i = 0; i < 3000; i++) {
+    const v = 35 + (Math.random() * 40 | 0);
+    g.fillStyle = `rgba(${v + 12},${v + 5},${v - 5},0.35)`;
+    g.fillRect(Math.random() * w, Math.random() * h, 2, 2);
+  }
+});
+texasGroundTex.repeat.set(320, 320);
+const gr = new THREE.Mesh(
+  new THREE.PlaneGeometry(4200, 4200),
+  new THREE.MeshStandardMaterial({ map: texasGroundTex, roughness: 0.96, metalness: 0.05 })
+);
+gr.rotation.x = -PI / 2;
+gr.position.y = -0.03;
+gr.receiveShadow = true;
+scene.add(gr);
+
+// High-detail asphalt test track surface with painted telemetry distance markers
+const asp = tex(128, 512, (g, w, h) => {
+  g.fillStyle = '#1c1f24';
+  g.fillRect(0, 0, w, h);
+  for (let i = 0; i < 1400; i++) {
+    const v = 25 + (Math.random() * 35 | 0);
+    g.fillStyle = `rgba(${v},${v},${v + 4},0.25)`;
+    g.fillRect(Math.random() * w, Math.random() * h, 1.5, 1.5);
+  }
+  // Edge lines (red & white SpaceX pad markings)
+  g.fillStyle = '#e82127';
+  g.fillRect(4, 0, 3, h);
+  g.fillRect(w - 7, 0, 3, h);
+  g.fillStyle = 'rgba(255,255,255,0.65)';
+  g.fillRect(10, 0, 1.5, h);
+  g.fillRect(w - 11.5, 0, 1.5, h);
+  // Center dashed line
+  g.fillStyle = '#cbd5e1';
+  g.fillRect(w / 2 - 1.5, 30, 3, 140);
+  g.fillRect(w / 2 - 1.5, 280, 3, 140);
+});
+
+function road(x, z0, z1, w = 15) {
+  const t = asp.clone();
+  t.needsUpdate = true;
+  t.repeat.set(1, Math.abs(z1 - z0) / 14);
+  const m = new THREE.Mesh(
+    new THREE.PlaneGeometry(w, Math.abs(z1 - z0)),
+    new THREE.MeshStandardMaterial({ map: t, roughness: 0.78, metalness: 0.15 })
+  );
+  m.rotation.x = -PI / 2;
+  m.position.set(x, 0, (z0 + z1) / 2);
+  m.receiveShadow = true;
+  scene.add(m);
+}
+// Lane 1 (x = 0): Demo 01 — 170° Curved Arch Wall Climb, Inverted Roll & Unobstructed Landing Runway
+road(0, -160, 160, 15);
+// Lane 2 (x = 40): Demo 02 — Flat-Ground Cold-Gas Thruster Lift-Off & Kickflip over 5 Parked Teslas
+road(40, 80, -250, 16);
+
+// Illuminated Landing Target Zone on Lane 1 (x = 0, z = -10 to +35) — 100% clear road
+{
+  const lzMat = M(0x38bdf8, 0, 0.2, 0x38bdf8, 1.6);
+  for (const sx of [-7.2, 7.2]) {
+    B(0.18, 0.04, 46, lzMat, sx, 0.02, 12);
+  }
+}
+
+// ---------- Demo 01 Structure: 21m (68-ft) 170° Curved Suction Arch Wall ----------
+(function buildArchWall() {
+  const P = [], I = [], U = [], n = 80, Rs = R + H, hw = 3.8;
+  // Climbs up to 170 degrees (past vertical, nearly upside down at ~20.7m height)
+  const maxAngle = (170 * PI) / 180;
+  for (let i = 0; i <= n; i++) {
+    const t = (maxAngle * i) / n;
+    const y = H + R - Rs * Math.cos(t);
+    const z = L0 - Rs * Math.sin(t);
+    P.push(-hw, y, z, hw, y, z);
+    U.push(0, i / 2, 1, i / 2);
+    if (i < n) {
+      const a = 2 * i;
+      I.push(a, a + 1, a + 2, a + 1, a + 3, a + 2);
+    }
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(P, 3));
+  g.setAttribute('uv', new THREE.Float32BufferAttribute(U, 2));
+  g.setIndex(I);
+  g.computeVertexNormals();
+
+  const gt = tex(128, 128, (c, w, h) => {
+    c.fillStyle = '#2d323b';
+    c.fillRect(0, 0, w, h);
+    c.strokeStyle = '#1b1e24';
+    c.lineWidth = 2;
+    c.strokeRect(2, 2, w - 4, h - 4);
+    c.fillStyle = '#e82127';
+    c.fillRect(0, 0, 5, h);
+    c.fillRect(w - 5, 0, 5, h);
+    c.fillStyle = '#38bdf8';
+    c.fillRect(10, h / 2 - 2, w - 20, 2);
+  });
+
+  const rm = new THREE.Mesh(
+    g,
+    new THREE.MeshStandardMaterial({
+      map: gt,
+      bumpMap: gt,
+      bumpScale: 0.4,
+      color: 0xd0d7e2,
+      metalness: 0.65,
+      roughness: 0.35,
+      side: THREE.DoubleSide
+    })
+  );
+  rm.castShadow = rm.receiveShadow = true;
+  scene.add(rm);
+
+  // Heavy structural steel arch trusses & LED strip rails (strictly outside the road width)
+  const trussMat = M(0x9aa3ae, 0.85, 0.3);
+  const redNeon = M(0xe82127, 0.1, 0.2, 0xe82127, 2.2);
+  const cyanNeon = M(0x38bdf8, 0.1, 0.2, 0x38bdf8, 1.8);
+  for (const sx of [-1, 1]) {
+    B(0.45, 22.5, 0.45, trussMat, sx * 4.2, 11.25, L0 - 10);
+    B(0.45, 22.5, 0.45, trussMat, sx * 4.2, 11.25, L0 - 2.5);
+    B(0.35, 16.0, 0.35, trussMat, sx * 4.2, 8.0, L0 - 6.2);
+    B(0.4, 0.4, 14, trussMat, sx * 4.2, 22.2, L0 - 5.5);
+    B(0.14, 21.5, 0.14, redNeon, sx * 3.95, 10.8, L0 - 9.8);
+    B(0.12, 0.12, 13.5, cyanNeon, sx * 3.95, 21.8, L0 - 5.5);
+  }
+  const hdrTex = tex(512, 96, (c, w, h) => {
+    c.fillStyle = '#090d14';
+    c.fillRect(0, 0, w, h);
+    c.strokeStyle = '#e82127';
+    c.lineWidth = 6;
+    c.strokeRect(3, 3, w - 6, h - 6);
+    c.fillStyle = '#ffffff';
+    c.font = '700 34px monospace';
+    c.textAlign = 'center';
+    c.fillText('170° INVERTED · 21M · 2G FAN', w / 2, 60);
+  });
+  const hdr = new THREE.Mesh(new THREE.PlaneGeometry(8.4, 1.5), new THREE.MeshBasicMaterial({ map: hdrTex, side: THREE.DoubleSide }));
+  hdr.position.set(0, 23.1, L0 - 1.5);
+  scene.add(hdr);
+})();
+
+// ---------- Demo 02 Lineup: 5 Parked Tesla Vehicles on Flat Asphalt (NO RAMP!) ----------
+// In Demo 02, the Roadster approaches on flat ground, fires its underbody SpaceX cold-gas thrusters
+// to lift straight off the pavement, rotates 360° mid-air using attitude thrusters over the 5 cars,
+// and fires downward cold-gas thrusters to cushion its landing.
+const ex = (pts, w, mat, x, y, z, b = 0.05, ry = -PI / 2) => {
+  const sh = new THREE.Shape();
+  pts.forEach((p, i) => (i ? sh.lineTo(p[0], p[1]) : sh.moveTo(p[0], p[1])));
+  const g = new THREE.ExtrudeGeometry(sh, { depth: w, bevelEnabled: true, bevelSize: b, bevelThickness: b, bevelSegments: 3 });
+  g.translate(0, 0, -w / 2);
+  g.rotateY(ry);
+  const m = new THREE.Mesh(g, mat);
+  m.position.set(x, y, z);
+  m.castShadow = m.receiveShadow = true;
+  scene.add(m);
+  return m;
+};
+
+const tireMat = M(0x0c0d10, 0.1, 0.88);
+const rimMat = M(0xcbd5e1, 0.9, 0.25);
+const glassMat = M(0x09131c, 0.95, 0.06);
+const headLightMat = M(0xffffff, 0.1, 0.1, 0xe0f2fe, 2.5);
+const tailLightMat = M(0xe82127, 0.1, 0.1, 0xe82127, 2.5);
+
+const wh = (x, z, r = 0.36) => {
+  for (const [rr, mt, wd] of [[r, tireMat, 0.28], [r * 0.64, rimMat, 0.31]]) {
+    const t = new THREE.Mesh(new THREE.CylinderGeometry(rr, rr, wd, 20), mt);
+    t.rotation.z = PI / 2;
+    t.position.set(x, r, z);
+    t.castShadow = true;
+    scene.add(t);
+  }
+};
+
+function buildFleetVehicle(z, L, w, h, colorHex, isCyber = false) {
+  const paint = new THREE.MeshPhysicalMaterial({ color: colorHex, metalness: isCyber ? 0.92 : 0.72, roughness: isCyber ? 0.22 : 0.26, clearcoat: isCyber ? 0.3 : 1.0 });
+  if (isCyber) {
+    ex([[-L / 2, 0.38], [-L / 2, h * 0.46], [L * 0.06, h], [L / 2, h * 0.62], [L / 2, 0.38]], w, paint, 40, 0, z, 0.02);
+    ex([[-L * 0.26, h * 0.52], [L * 0.05, h * 0.96], [L * 0.28, h * 0.64], [-L * 0.26, h * 0.52]], w * 0.88, glassMat, 40, 0, z, 0.01);
+  } else {
+    ex([[-L / 2, 0.3], [-L / 2, h * 0.5], [-L * 0.25, h * 0.62], [L * 0.2, h * 0.64], [L / 2, h * 0.54], [L / 2, 0.3]], w, paint, 40, 0, z);
+    ex([[-L * 0.22, h * 0.6], [-L * 0.06, h], [L * 0.18, h], [L * 0.32, h * 0.62]], w * 0.86, glassMat, 40, 0, z, 0.03);
+  }
+  B(0.06, 0.06, w * 0.86, headLightMat, 40 - L / 2 - 0.02, h * 0.45, z);
+  B(0.06, 0.06, w * 0.86, tailLightMat, 40 + L / 2 + 0.02, h * 0.48, z);
+  for (const a of [-1, 1]) for (const b of [-0.31, 0.31]) wh(40 + a * w * 0.46, z + L * b, isCyber ? 0.45 : 0.36);
+}
+
+// Painted flush ground lift-off line on Lane 2 (x = 40, z = -25) — flat pavement, zero ramp!
+B(12, 0.015, 0.4, M(0x38bdf8, 0, 0.2, 0x38bdf8, 2), 40, 0.01, -25);
+
+// 1) Model 3 Performance (Quicksilver)
+buildFleetVehicle(-40, 4.72, 1.85, 1.44, 0xc8d0d8, false);
+// 2) Model Y (Ultra Red)
+buildFleetVehicle(-47.5, 4.75, 1.92, 1.62, 0xb80f1a, false);
+// 3) 13.5-foot-tall (4.11m) Tesla Semi in the center of the lineup
+{
+  const semiZ = -56.5;
+  const semiPaint = new THREE.MeshPhysicalMaterial({ color: 0xeef2f6, metalness: 0.45, roughness: 0.25, clearcoat: 0.9 });
+  ex([
+    [-3.2, 0.45], [-3.2, 1.5], [-2.1, 2.7], [-0.8, 4.11], [1.8, 4.11], [1.8, 0.45]
+  ], 2.55, semiPaint, 40, 0, semiZ, 0.06);
+  ex([[-2.15, 1.65], [-1.25, 2.95], [-0.4, 2.95], [-0.4, 1.65]], 2.42, glassMat, 40, 0, semiZ, 0.02);
+  B(9.5, 4.05, 2.55, M(0xe2e8f0, 0.35, 0.4), 45.5, 2.35, semiZ);
+  B(0.1, 0.08, 1.8, headLightMat, 36.78, 1.1, semiZ);
+  for (const a of [-1, 1]) for (const zz of [-54.5, -58.5]) wh(38.2 + a * 1.4, zz, 0.54);
+}
+// 4) Cybertruck (Stainless Steel Exoskeleton)
+buildFleetVehicle(-66, 5.68, 2.02, 1.79, 0xb8c0c8, true);
+// 5) Cybercab Robotaxi (Cyber Gold 2-Seater)
+buildFleetVehicle(-73.5, 4.25, 1.84, 1.38, 0xd8b46c, false);
+
+// ---------- McGregor Event Stage (Set well to the side so Lane 1 Landing Road is 100% Clear) ----------
+{
+  const ban = tex(1024, 256, (g, w, h) => {
+    g.fillStyle = '#090c12';
+    g.fillRect(0, 0, w, h);
+    g.strokeStyle = '#e82127';
+    g.lineWidth = 8;
+    g.strokeRect(8, 8, w - 16, h - 16);
+    g.fillStyle = '#e82127';
+    g.font = '800 118px system-ui, sans-serif';
+    g.textAlign = 'center';
+    g.fillText('R O A D S T E R', w / 2, 145);
+    g.fillStyle = '#94a3b8';
+    g.font = '600 32px monospace';
+    g.fillText('SPACEX MCGREGOR · OCTOBER 15, 2026 · LIVE DEMO', w / 2, 210);
+  });
+  // Positioned at x = -42 (width 36 -> spans x = -60 to x = -24), completely clear of Lane 1 (x = -7.5 to +7.5)
+  B(36, 8.5, 6, M(0x181c24, 0.6, 0.5), -42, 4.25, 14);
+  const bm = new THREE.Mesh(new THREE.PlaneGeometry(34, 6.8), new THREE.MeshBasicMaterial({ map: ban }));
+  bm.position.set(-42, 5.2, 10.92);
+  scene.add(bm);
+
+  // SpaceX McGregor Raptor Static-Fire Test Stand in background
+  const stMat = M(0x7c8594, 0.8, 0.35);
+  B(18, 38, 18, stMat, 135, 19, -155);
+  B(10, 22, 10, stMat, 135, 49, -155);
+  const rapGlow = new THREE.Mesh(
+    new THREE.ConeGeometry(5.5, 22, 20),
+    new THREE.MeshBasicMaterial({ color: 0xbae6fd, transparent: true, opacity: 0.75 })
+  );
+  rapGlow.position.set(135, 11, -144);
+  rapGlow.rotation.x = PI;
+  scene.add(rapGlow);
+
+  // SpaceX stainless steel water/propellant towers at McGregor
+  const ss = M(0xcfd6df, 0.92, 0.22);
+  [[115, -95], [148, -55], [-135, -110]].forEach(([x, z]) => {
+    const c = new THREE.Mesh(new THREE.CylinderGeometry(4.2, 4.2, 56, 24), ss);
+    c.position.set(x, 28, z);
+    scene.add(c);
+    const n = new THREE.Mesh(new THREE.ConeGeometry(4.2, 14, 24), ss);
+    n.position.set(x, 63, z);
+    scene.add(n);
+  });
+
+  // Floodlight towers lining the stunt arena (well outside road boundaries)
+  const poleMat = M(0x475569, 0.8, 0.4);
+  const lampMat = M(0xffffff, 0, 0.1, 0xeef6ff, 4);
+  [[-16, -15], [-16, -65], [18, -15], [18, -65], [56, -20], [56, -75]].forEach(([lx, lz]) => {
+    B(0.35, 26, 0.35, poleMat, lx, 13, lz);
+    B(2.4, 0.8, 0.6, lampMat, lx, 26.2, lz);
+  });
+}
+
+// Distant Texas limestone mesas
+for (let i = 0; i < 28; i++) {
+  const a = (i / 28) * PI * 2;
+  const c = new THREE.Mesh(new THREE.ConeGeometry(130 + Math.random() * 80, 45 + Math.random() * 35, 6), M(0x3a3228, 0, 1));
+  c.position.set(Math.cos(a) * 950, 15, Math.sin(a) * 950);
+  scene.add(c);
+}
+
+// ---------- Authentic 2026 Tesla Roadster Cockpit & Exterior (Rocket Spec) ----------
+const car = new THREE.Group();
+car.position.x = 0.38;
+rig.add(car);
+
+const microsuedeTex = tex(128, 128, (g, w, h) => {
+  g.fillStyle = '#32363d';
+  g.fillRect(0, 0, w, h);
+  for (let i = 0; i < 4000; i++) {
+    const v = 40 + (Math.random() * 30 | 0);
+    g.fillStyle = `rgba(${v},${v + 2},${v + 5},0.35)`;
+    g.fillRect(Math.random() * w, Math.random() * h, 2, 2);
+  }
+});
+microsuedeTex.repeat.set(4, 4);
+
+const carbonTex = tex(64, 64, (g, w, h) => {
+  g.fillStyle = '#14171c';
+  g.fillRect(0, 0, w, h);
+  g.fillStyle = '#222730';
+  for (let y = 0; y < h; y += 8) {
+    for (let x = 0; x < w; x += 8) {
+      g.fillRect(x + ((y / 8) % 2) * 4, y, 4, 4);
+    }
+  }
+});
+carbonTex.repeat.set(8, 8);
+
+const bodyPaint = new THREE.MeshPhysicalMaterial({
+  color: 0xc8102e,
+  metalness: 0.78,
+  roughness: 0.2,
+  clearcoat: 1.0,
+  clearcoatRoughness: 0.03
+});
+const ultraWhiteMat = new THREE.MeshStandardMaterial({ color: 0xf1f5f9, roughness: 0.42, metalness: 0.08 });
+const suedeMat = new THREE.MeshStandardMaterial({ color: 0x383e47, roughness: 0.82, metalness: 0.08, bumpMap: microsuedeTex, bumpScale: 0.015 });
+const carbonMat = new THREE.MeshStandardMaterial({ color: 0x181c22, roughness: 0.32, metalness: 0.45, map: carbonTex });
+const titaniumTrim = M(0x94a3b8, 0.92, 0.22);
+const goldNozzleMat = M(0xd4af37, 0.95, 0.2, 0x332200, 0.3);
+
+// Sculpted front hood with active Aero Vent Hood channel
+B(1.94, 0.18, 1.85, bodyPaint, 0, -0.54, -1.62, car);
+B(0.76, 0.06, 0.85, carbonMat, 0, -0.44, -1.42, car);
+B(0.48, 0.36, 2.25, bodyPaint, -0.86, -0.34, -1.32, car);
+B(0.48, 0.36, 2.25, bodyPaint, 0.86, -0.34, -1.32, car);
+B(1.88, 0.045, 0.06, headLightMat, 0, -0.46, -2.54, car);
+B(1.92, 0.05, 0.06, tailLightMat, 0, -0.28, 1.68, car);
+B(2.04, 0.04, 2.8, carbonMat, 0, -0.68, -0.4, car);
+
+// Upper dashboard in Grey Microsuede + Ultrawhite bolster wing + Carbon fiber bridge
+B(1.92, 0.28, 0.56, suedeMat, 0, -0.48, -0.64, car).rotation.x = 0.12;
+B(1.88, 0.07, 0.24, ultraWhiteMat, 0, -0.34, -0.56, car);
+B(1.92, 0.05, 0.05, titaniumTrim, 0, 0.35, -0.78, car);
+B(2.08, 0.05, 0.05, carbonMat, 0, 0.41, 0.1, car);
+
+for (const sx of [-1, 1]) {
+  const ap = B(0.055, 0.64, 0.055, carbonMat, sx * 0.93, 0.02, -0.75, car);
+  ap.rotation.x = -0.9;
+  B(0.09, 0.54, 1.55, bodyPaint, sx * 1.02, -0.3, 0.28, car);
+  B(0.06, 0.14, 1.45, ultraWhiteMat, sx * 0.96, -0.22, 0.28, car);
+  B(0.19, 0.09, 0.22, carbonMat, sx * 1.12, -0.05, -0.84, car);
+  // Fixed Moulded Seat Shell
+  B(0.52, 0.82, 0.12, carbonMat, sx * 0.38, -0.12, 0.52, car);
+  B(0.44, 0.74, 0.09, ultraWhiteMat, sx * 0.38, -0.12, 0.47, car);
+  B(0.08, 0.72, 0.14, suedeMat, sx * 0.38 - 0.21, -0.12, 0.45, car);
+  B(0.08, 0.72, 0.14, suedeMat, sx * 0.38 + 0.21, -0.12, 0.45, car);
+  B(0.22, 0.16, 0.1, ultraWhiteMat, sx * 0.38, 0.34, 0.48, car);
+}
+
+B(0.22, 0.22, 1.15, carbonMat, 0, -0.52, 0.05, car);
+
+// Rear Bay behind seats: Two 600-Liter SpaceX Carbon Overwrapped Pressure Vessels (COPVs) at 5,500 PSI
+B(2.08, 0.48, 0.85, carbonMat, 0, -0.56, 1.15, car);
+for (const sx of [-0.42, 0.42]) {
+  const copv = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.22, 0.95, 20), carbonMat);
+  copv.rotation.z = PI / 2;
+  copv.position.set(sx, -0.22, 1.08);
+  car.add(copv);
+  const cap = new THREE.Mesh(new THREE.SphereGeometry(0.215, 16, 12), titaniumTrim);
+  cap.position.set(sx, -0.22, 1.08);
+  car.add(cap);
+}
+
+// Active Variable-Pitch Rear Wing
+const rearWingGroup = new THREE.Group();
+rearWingGroup.position.set(0, -0.02, 1.55);
+car.add(rearWingGroup);
+B(1.76, 0.035, 0.34, carbonMat, 0, 0.16, 0, rearWingGroup);
+B(0.04, 0.2, 0.22, titaniumTrim, -0.62, 0.06, 0.04, rearWingGroup);
+B(0.04, 0.2, 0.22, titaniumTrim, 0.62, 0.06, 0.04, rearWingGroup);
+
+// 4 Gold-Ringed SpaceX Main Supersonic Thruster Nozzles in the Rear Diffuser
+for (const nx of [-0.52, -0.18, 0.18, 0.52]) {
+  const noz = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.11, 0.18, 16), goldNozzleMat);
+  noz.rotation.x = PI / 2;
+  noz.position.set(nx, -0.46, 1.68);
+  car.add(noz);
+}
+
+const gl = new THREE.Mesh(
+  new THREE.PlaneGeometry(1.9, 0.72),
+  new THREE.MeshBasicMaterial({ color: 0x93c5fd, transparent: true, opacity: 0.06 })
+);
+gl.position.set(0, 0.05, -0.76);
+gl.rotation.x = -0.9;
+car.add(gl);
+
+// ---------- Steer-by-Wire Yoke ----------
+const yoke = new THREE.Group();
+yoke.position.set(-0.38, -0.14, -0.39);
+yoke.rotation.x = -0.42;
+car.add(yoke);
+B(0.46, 0.042, 0.045, suedeMat, 0, -0.06, 0, yoke);
+B(0.048, 0.22, 0.05, suedeMat, -0.22, 0.02, 0, yoke);
+B(0.048, 0.22, 0.05, suedeMat, 0.22, 0.02, 0, yoke);
+B(0.14, 0.09, 0.05, carbonMat, 0, -0.02, 0.01, yoke);
+B(0.024, 0.024, 0.024, titaniumTrim, -0.16, 0.06, 0.028, yoke);
+B(0.024, 0.024, 0.024, M(0xe82127, 0.2, 0.3, 0xe82127, 1.5), 0.16, 0.06, 0.028, yoke);
+
+// ---------- 3 Digital Cockpit Screens ----------
+const hc = document.createElement('canvas');
+hc.width = 640;
+hc.height = 360;
+const hx = hc.getContext('2d');
+const ht = new THREE.CanvasTexture(hc);
+ht.encoding = THREE.sRGBEncoding;
+const scr = new THREE.Mesh(new THREE.PlaneGeometry(0.48, 0.27), new THREE.MeshBasicMaterial({ map: ht }));
+scr.position.set(0, -0.28, -0.58);
+scr.rotation.x = -0.48;
+car.add(scr);
+
+const dc = document.createElement('canvas');
+dc.width = 512;
+dc.height = 220;
+const dx = dc.getContext('2d');
+const dtTex = new THREE.CanvasTexture(dc);
+dtTex.encoding = THREE.sRGBEncoding;
+const dScr = new THREE.Mesh(new THREE.PlaneGeometry(0.36, 0.155), new THREE.MeshBasicMaterial({ map: dtTex }));
+dScr.position.set(-0.38, -0.17, -0.59);
+dScr.rotation.x = -0.38;
+car.add(dScr);
+
+const pcCan = document.createElement('canvas');
+pcCan.width = 420;
+pcCan.height = 200;
+const px = pcCan.getContext('2d');
+const ptTex = new THREE.CanvasTexture(pcCan);
+ptTex.encoding = THREE.sRGBEncoding;
+const pScr = new THREE.Mesh(new THREE.PlaneGeometry(0.34, 0.16), new THREE.MeshBasicMaterial({ map: ptTex }));
+pScr.position.set(0.42, -0.24, -0.59);
+pScr.rotation.x = -0.42;
+car.add(pScr);
+
+{
+  const cl = new THREE.PointLight(0xe0f2fe, 0.65, 3.2);
+  cl.position.set(0, 0.32, -0.18);
+  car.add(cl);
+}
+
+// ---------- Supersonic Mach Diamonds (Rear Diffuser & Downward Thruster Plumes) ----------
+const machGroup = new THREE.Group();
+machGroup.position.set(0, -0.46, 1.82);
+car.add(machGroup);
+const machCones = [];
+for (const nx of [-0.52, -0.18, 0.18, 0.52]) {
+  const gCone = new THREE.Group();
+  gCone.position.set(nx, 0, 0);
+  const outer = new THREE.Mesh(
+    new THREE.ConeGeometry(0.11, 1.45, 16, 1, true),
+    new THREE.MeshBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.75, blending: THREE.AdditiveBlending, side: THREE.DoubleSide, depthWrite: false })
+  );
+  outer.rotation.x = -PI / 2;
+  outer.position.z = 0.72;
+  gCone.add(outer);
+  for (let d = 0; d < 4; d++) {
+    const dm = new THREE.Mesh(
+      new THREE.OctahedronGeometry(0.055 - d * 0.008, 1),
+      new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.95, blending: THREE.AdditiveBlending, depthWrite: false })
+    );
+    dm.scale.set(1, 1, 1.8);
+    dm.position.z = 0.22 + d * 0.28;
+    gCone.add(dm);
+  }
+  machGroup.add(gCone);
+  machCones.push(gCone);
+}
+machGroup.visible = false;
+
+// ---------- Cold-Gas Thruster & Landing Vapor Cloud Particles ----------
+const N = 1200;
+const pp = new Float32Array(N * 3), pc = new Float32Array(N * 3), pv = new Float32Array(N * 3), pl = new Float32Array(N);
+let pn = 0;
+const dot = tex(64, 64, g => {
+  const r = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+  r.addColorStop(0, '#ffffff');
+  r.addColorStop(0.4, 'rgba(186,230,253,0.75)');
+  r.addColorStop(1, 'rgba(255,255,255,0)');
+  g.fillStyle = r;
+  g.fillRect(0, 0, 64, 64);
+});
+const pg = new THREE.BufferGeometry();
+pg.setAttribute('position', new THREE.BufferAttribute(pp, 3));
+pg.setAttribute('color', new THREE.BufferAttribute(pc, 3));
+const pts = new THREE.Points(
+  pg,
+  new THREE.PointsMaterial({ size: 1.05, vertexColors: true, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, map: dot })
+);
+pts.frustumCulled = false;
+scene.add(pts);
+
+const bs = new THREE.Mesh(
+  new THREE.CircleGeometry(1, 28),
+  new THREE.MeshBasicMaterial({ map: dot, color: 0xbae6fd, transparent: true, opacity: 0, depthWrite: false })
+);
+bs.rotation.x = -PI / 2;
+bs.position.y = 0.04;
+scene.add(bs);
+
+const tv = new THREE.Vector3(), td = new THREE.Vector3();
+function puff(lx, ly, lz, dx, dy, dz, count, sp = 8.5) {
+  for (let k = 0; k < count; k++) {
+    tv.set(lx + 0.38, ly, lz).applyQuaternion(rig.quaternion).add(rig.position);
+    td.set(dx + (Math.random() - 0.5) * 0.55, dy + (Math.random() - 0.5) * 0.55, dz + (Math.random() - 0.5) * 0.55)
+      .applyQuaternion(rig.quaternion)
+      .multiplyScalar(sp * (0.65 + Math.random()));
+    pp.set([tv.x, tv.y, tv.z], pn * 3);
+    pv.set([td.x, td.y, td.z], pn * 3);
+    pl[pn] = 1;
+    pn = (pn + 1) % N;
+  }
+}
+
+function jets(count, rearBoost = false) {
+  if (count <= 0) return;
+  // 4 corner vertical lift / landing cold-gas nozzles
+  puff(-0.95, -0.55, -1.35, -0.25, -1, 0, count, 10);
+  puff(0.95, -0.55, -1.35, 0.25, -1, 0, count, 10);
+  puff(-0.95, -0.55, 1.25, -0.25, -1, 0, count, 10);
+  puff(0.95, -0.55, 1.25, 0.25, -1, 0, count, 10);
+  // Lateral attitude roll control nozzles
+  puff(-1.15, -0.35, 0.1, -1, -0.2, 0, Math.ceil(count * 0.75), 8.5);
+  puff(1.15, -0.35, 0.1, 1, -0.2, 0, Math.ceil(count * 0.75), 8.5);
+  // 4 rear main supersonic diffuser nozzles
+  if (rearBoost) {
+    puff(-0.45, -0.45, 1.75, 0, 0, 1.4, count * 2, 16);
+    puff(0.45, -0.45, 1.75, 0, 0, 1.4, count * 2, 16);
+  } else {
+    puff(-0.45, -0.45, 1.75, 0, -0.2, 1, count, 10);
+    puff(0.45, -0.45, 1.75, 0, -0.2, 1, count, 10);
+  }
+}
+
+// ---------- Head-Locked Comfort Vignette ----------
+let comf = true;
+const pq = new THREE.Quaternion();
+const vg = tex(256, 256, g => {
+  const r = g.createRadialGradient(128, 128, 52, 128, 128, 128);
+  r.addColorStop(0, 'rgba(0,0,0,0)');
+  r.addColorStop(1, 'rgba(0,0,0,1)');
+  g.fillStyle = r;
+  g.fillRect(0, 0, 256, 256);
+});
+vg.wrapS = vg.wrapT = THREE.ClampToEdgeWrapping;
+const vig = new THREE.Mesh(
+  new THREE.PlaneGeometry(2, 2),
+  new THREE.MeshBasicMaterial({ map: vg, transparent: true, opacity: 0, depthTest: false, depthWrite: false })
+);
+vig.position.z = -0.25;
+vig.renderOrder = 999;
+cam.add(vig);
+
+// ---------- Synthesized Audio Engine (EV Motor + 2G Suction Fan + Continuous & Burst Cold-Gas Thrusters) ----------
+let AC, mo, mg, fanOsc, fanGain, coldGasLoopGain, coldGasWhistle, coldGasWhistleGain, nb, muted = false;
+let thrusterAudioLevel = 0;
+
+function audio() {
+  if (AC) return;
+  const Ctx = window.AudioContext || window.webkitAudioContext;
+  if (!Ctx) return;
+  AC = new Ctx();
+
+  // 1. Electric drive inverter whine
+  mo = AC.createOscillator();
+  mo.type = 'sawtooth';
+  const f = AC.createBiquadFilter();
+  f.frequency.value = 780;
+  mg = AC.createGain();
+  mg.gain.value = 0;
+  mo.connect(f);
+  f.connect(mg);
+  mg.connect(AC.destination);
+  mo.start();
+
+  // 2. Dual-fan underbody suction turbine whine (2G / 4,700 kg downforce)
+  fanOsc = AC.createOscillator();
+  fanOsc.type = 'triangle';
+  fanOsc.frequency.value = 420;
+  fanGain = AC.createGain();
+  fanGain.gain.value = 0;
+  fanOsc.connect(fanGain);
+  fanGain.connect(AC.destination);
+  fanOsc.start();
+
+  // 3. White noise buffer for 5,500 PSI SpaceX Cold-Gas Thrusters
+  nb = AC.createBuffer(1, AC.sampleRate * 2, AC.sampleRate);
+  const d = nb.getChannelData(0);
+  for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+
+  // Continuous looping cold-gas thruster jet stream (modulated during takeoff, attitude roll, and landing burn)
+  const loopSrc = AC.createBufferSource();
+  loopSrc.buffer = nb;
+  loopSrc.loop = true;
+  const jetBand = AC.createBiquadFilter();
+  jetBand.type = 'bandpass';
+  jetBand.frequency.value = 1150;
+  jetBand.Q.value = 0.65;
+  coldGasLoopGain = AC.createGain();
+  coldGasLoopGain.gain.value = 0;
+  loopSrc.connect(jetBand);
+  jetBand.connect(coldGasLoopGain);
+  coldGasLoopGain.connect(AC.destination);
+  loopSrc.start();
+
+  // Supersonic Mach-diamond nozzle whistle layer
+  coldGasWhistle = AC.createOscillator();
+  coldGasWhistle.type = 'sine';
+  coldGasWhistle.frequency.value = 1950;
+  coldGasWhistleGain = AC.createGain();
+  coldGasWhistleGain.gain.value = 0;
+  coldGasWhistle.connect(coldGasWhistleGain);
+  coldGasWhistleGain.connect(AC.destination);
+  coldGasWhistle.start();
+}
+
+// High-pressure SpaceX Cold-Gas Thruster blast (solenoid crack + supersonic air rush + low-end shock thump)
+function hiss(g = 0.7, t = 0.85, freq = 1250) {
+  if (!AC || muted) return;
+  const now = AC.currentTime;
+
+  // High-velocity compressed air blast
+  const s = AC.createBufferSource();
+  s.buffer = nb;
+  const f = AC.createBiquadFilter();
+  f.type = 'bandpass';
+  f.frequency.setValueAtTime(freq, now);
+  f.frequency.exponentialRampToValueAtTime(Math.max(400, freq * 0.55), now + t);
+  f.Q.value = 0.65;
+  const o = AC.createGain();
+  o.gain.setValueAtTime(Math.min(1.0, g), now);
+  o.gain.exponentialRampToValueAtTime(0.001, now + t);
+  s.connect(f);
+  f.connect(o);
+  o.connect(AC.destination);
+  s.start(now);
+  s.stop(now + t + 0.05);
+
+  // Low-frequency pneumatic COPV pressure wave thump
+  const thump = AC.createOscillator();
+  thump.type = 'sine';
+  thump.frequency.setValueAtTime(135, now);
+  thump.frequency.exponentialRampToValueAtTime(38, now + Math.min(0.45, t * 0.6));
+  const tg = AC.createGain();
+  tg.gain.setValueAtTime(Math.min(0.65, g * 0.6), now);
+  tg.gain.exponentialRampToValueAtTime(0.001, now + Math.min(0.45, t * 0.6));
+  thump.connect(tg);
+  tg.connect(AC.destination);
+  thump.start(now);
+  thump.stop(now + Math.min(0.5, t * 0.65));
+}
+
+function buzz(a = 0.6, d = 200) {
+  const s = ren.xr.getSession && ren.xr.getSession();
+  if (s) {
+    for (const i of s.inputSources) {
+      if (i.gamepad && i.gamepad.hapticActuators && i.gamepad.hapticActuators[0]) {
+        i.gamepad.hapticActuators[0].pulse(a, d);
+      }
+    }
+  }
+}
+
+// ---------- Telemetry & 3-Screen Cockpit Rendering ----------
+let spd = 0, altMeters = 0, pitchDeg = 0, rollDeg = 0, gForce = 1.0, downforceKg = 0, copvPsi = 5500, fanActive = false;
+
+const telModeEl = document.getElementById('telMode');
+const telSpdEl = document.getElementById('telSpd');
+const telAltEl = document.getElementById('telAlt');
+const telAttEl = document.getElementById('telAtt');
+const telGEl = document.getElementById('telG');
+const telDfEl = document.getElementById('telDf');
+const telPsiEl = document.getElementById('telPsi');
+const psiBarEl = document.getElementById('psiBar');
+
+function updateCockpitScreens(statusTitle, stuntName) {
+  const mph = Math.round(spd * 2.23694);
+  const kmh = Math.round(spd * 3.6);
+  const altFt = (altMeters * 3.28084).toFixed(1);
+
+  telModeEl.textContent = statusTitle;
+  telSpdEl.textContent = `${mph} MPH (${kmh} KM/H)`;
+  telAltEl.textContent = `${altFt} FT (${altMeters.toFixed(1)} M)`;
+  telAttEl.textContent = `${Math.round(pitchDeg)}° / ${Math.round(rollDeg)}°`;
+  telGEl.textContent = `${gForce.toFixed(1)} G`;
+  telDfEl.textContent = `${Math.round(downforceKg).toLocaleString()} KG`;
+  telPsiEl.textContent = `${Math.round(copvPsi).toLocaleString()} PSI`;
+  psiBarEl.style.width = `${Math.max(5, (copvPsi / 5500) * 100)}%`;
+
+  // 1) Center Touchscreen: Authentic Oct 15 Track Mode & Dynamics UI
+  hx.fillStyle = '#070b12';
+  hx.fillRect(0, 0, 640, 360);
+  hx.strokeStyle = '#1e293b';
+  hx.lineWidth = 2;
+  hx.strokeRect(8, 8, 624, 344);
+
+  hx.fillStyle = '#94a3b8';
+  hx.font = '600 15px sans-serif';
+  hx.textAlign = 'left';
+  hx.fillText('VEHICLE  ›  DYNAMICS  ›  ROCKET FLIGHT MODE', 22, 32);
+  hx.fillStyle = '#e82127';
+  hx.textAlign = 'right';
+  hx.fillText(stuntName, 618, 32);
+
+  hx.fillStyle = '#0f172a';
+  hx.fillRect(20, 46, 285, 145);
+  hx.fillStyle = '#38bdf8';
+  hx.font = '700 16px monospace';
+  hx.textAlign = 'left';
+  hx.fillText('SPACEX COPV THRUSTER PRESSURE', 32, 72);
+  hx.fillStyle = '#ffffff';
+  hx.font = '800 42px monospace';
+  hx.fillText(`${Math.round(copvPsi).toLocaleString()} PSI`, 32, 122);
+  hx.fillStyle = '#64748b';
+  hx.font = '600 14px monospace';
+  hx.fillText('600L · 250 KG AIR · 10 NOZZLES · 80 kN', 32, 148);
+  hx.fillStyle = '#1e293b';
+  hx.fillRect(32, 162, 260, 14);
+  hx.fillStyle = copvPsi > 2000 ? '#38bdf8' : '#e82127';
+  hx.fillRect(32, 162, Math.max(8, (copvPsi / 5500) * 260), 14);
+
+  hx.fillStyle = '#0f172a';
+  hx.fillRect(320, 46, 300, 145);
+  hx.fillStyle = '#e2e8f0';
+  hx.font = '700 15px monospace';
+  hx.fillText('AERO & SUCTION DYNAMICS', 334, 72);
+  hx.font = '600 14px monospace';
+  hx.fillStyle = '#94a3b8';
+  hx.fillText('FRONT / REAR WING:', 334, 100);
+  hx.fillStyle = '#38bdf8';
+  hx.fillText('HIGH DOWNFORCE', 485, 100);
+  hx.fillStyle = '#94a3b8';
+  hx.fillText('BARGE BOARDS / HOOD:', 334, 124);
+  hx.fillStyle = '#38bdf8';
+  hx.fillText('DEPLOYED', 505, 124);
+  hx.fillStyle = '#94a3b8';
+  hx.fillText('AERO LOAD:', 334, 148);
+  hx.fillStyle = fanActive ? '#22c55e' : '#f59e0b';
+  hx.fillText(fanActive ? 'MAX GRIP (2G FAN)' : 'COPV THRUSTER ATTITUDE', 435, 148);
+  hx.fillStyle = '#ffffff';
+  hx.fillText(`DOWNFORCE: ${Math.round(downforceKg).toLocaleString()} KG`, 334, 174);
+
+  hx.fillStyle = '#0f172a';
+  hx.fillRect(20, 204, 600, 134);
+  hx.fillStyle = '#e82127';
+  hx.font = '800 26px sans-serif';
+  hx.textAlign = 'center';
+  hx.fillText(statusTitle, 320, 240);
+  hx.fillStyle = '#cbd5e1';
+  hx.font = '600 16px monospace';
+  hx.fillText(`G-LOAD: ${gForce.toFixed(2)} G   ·   ALT: ${altFt} FT   ·   PITCH: ${Math.round(pitchDeg)}°   ·   ROLL: ${Math.round(rollDeg)}°`, 320, 276);
+  hx.fillStyle = '#64748b';
+  hx.font = '600 14px monospace';
+  hx.fillText('PIRELLI P ZERO TROFEO RS ELECT: 42 PSI · BEST LAP 1:31.074 · LAST 1:31.501', 320, 314);
+  ht.needsUpdate = true;
+
+  // 2) Driver Cluster Screen
+  dx.fillStyle = '#05080f';
+  dx.fillRect(0, 0, 512, 220);
+  dx.strokeStyle = '#334155';
+  dx.lineWidth = 2;
+  dx.strokeRect(4, 4, 504, 212);
+  dx.textAlign = 'center';
+  dx.fillStyle = '#ffffff';
+  dx.font = '800 84px sans-serif';
+  dx.fillText(mph, 150, 108);
+  dx.fillStyle = '#38bdf8';
+  dx.font = '700 20px monospace';
+  dx.fillText('MPH', 150, 138);
+  dx.fillStyle = '#e2e8f0';
+  dx.font = '700 24px monospace';
+  dx.fillText(`${gForce.toFixed(1)} G`, 370, 74);
+  dx.fillStyle = '#e82127';
+  dx.font = '700 22px monospace';
+  dx.fillText(`ALT ${altFt} FT`, 370, 114);
+  dx.fillStyle = '#94a3b8';
+  dx.font = '600 18px monospace';
+  dx.fillText(`PITCH ${Math.round(pitchDeg)}° · ROLL ${Math.round(rollDeg)}°`, 256, 188);
+  dtTex.needsUpdate = true;
+
+  // 3) Passenger Starship-Style Flight Counter & Horizon Screen
+  px.fillStyle = '#05080f';
+  px.fillRect(0, 0, 420, 200);
+  px.strokeStyle = '#1e293b';
+  px.strokeRect(4, 4, 412, 192);
+  px.save();
+  px.translate(110, 100);
+  px.rotate((-rollDeg * PI) / 180);
+  px.fillStyle = '#1e3a8a';
+  px.fillRect(-55, -55, 110, 55);
+  px.fillStyle = '#78350f';
+  px.fillRect(-55, 0, 110, 55);
+  px.strokeStyle = '#38bdf8';
+  px.lineWidth = 3;
+  px.beginPath();
+  px.moveTo(-55, 0);
+  px.lineTo(55, 0);
+  px.stroke();
+  px.restore();
+  px.fillStyle = '#38bdf8';
+  px.font = '700 16px monospace';
+  px.textAlign = 'left';
+  px.fillText('STARSHIP FLIGHT TELEMETRY', 185, 45);
+  px.fillStyle = '#ffffff';
+  px.font = '700 22px monospace';
+  px.fillText(`DF: ${Math.round(downforceKg)} KG`, 185, 85);
+  px.fillText(`THRUST: ${thrusterAudioLevel > 0.1 ? '80 kN FIRING' : 'ARMED'}`, 185, 120);
+  px.fillStyle = '#94a3b8';
+  px.font = '600 15px monospace';
+  px.fillText('MCGREGOR PAD 01', 185, 158);
+  ptTex.needsUpdate = true;
+}
+
+// ---------- Stunt Physics & Choreography State Machine (Demo 01 & Demo 02 Only) ----------
+// Demo 01: 170° Inverted Arch Wall Climb (21m / 68ft, 4,700kg 2G fan suction), drop & mid-air 180° roll, 3.3G cold-gas thruster landing on clear road
+// Demo 02: Pure Cold-Gas Thruster Lift-Off from flat road (no ramp), 360° thruster kickflip over 5 Teslas, and cold-gas thruster landing burn
+let mode = 0, nxt = 1, n = 1, ph = 0, v = 0, s = 0, th = 0, tf = 0, cd = 0;
+let landingBurnSoundPlayed = false, rollBurstSoundPlayed = false;
+const vel = new THREE.Vector3(), q1 = new THREE.Quaternion(), q2 = new THREE.Quaternion(), q3 = new THREE.Quaternion(), QY = new THREE.Quaternion().setFromAxisAngle(Y, PI);
+const ease = k => { k = Math.max(0, Math.min(1, k)); return k * k * (3 - 2 * k); };
+const names = ['', 'DEMO 01 · 170° ARCH CLIMB & ROLL', 'DEMO 02 · 5-TESLA THRUSTER KICKFLIP'];
+const lab = ['', '2G FAN SUCTION · 170° INVERTED', 'FLAT-GROUND COPV LIFT & 360° KICKFLIP'];
+const tip = document.getElementById('t');
+
+function updateStuntButtons(activeStunt) {
+  [1, 2].forEach(id => {
+    const b = document.getElementById('stunt' + id + 'Btn');
+    const c = document.getElementById('card' + id);
+    if (b) b.classList.toggle('active', id === activeStunt);
+    if (c) c.classList.toggle('active', id === activeStunt);
+  });
+}
+
+function positionAtStart(stuntId) {
+  rig.quaternion.identity();
+  spd = 0;
+  altMeters = 0;
+  pitchDeg = 0;
+  rollDeg = 0;
+  gForce = 1.0;
+  downforceKg = 0;
+  copvPsi = 5500;
+  fanActive = false;
+  thrusterAudioLevel = 0;
+  landingBurnSoundPlayed = false;
+  rollBurstSoundPlayed = false;
+  machGroup.visible = false;
+  if (stuntId === 1) rig.position.set(0, H, 8);
+  else rig.position.set(40, H, 18);
+}
+
+function selectStunt(stuntId) {
+  nxt = stuntId;
+  n = stuntId;
+  mode = 0;
+  ph = 0;
+  updateStuntButtons(stuntId);
+  positionAtStart(stuntId);
+}
+
+function trig() {
+  audio();
+  if (AC && AC.state === 'suspended') AC.resume();
+  if (mode === 0) {
+    n = nxt;
+    updateStuntButtons(n);
+    mode = 1;
+    cd = 2.4;
+    ph = 0;
+    v = 0;
+    s = 0;
+    positionAtStart(n);
+    buzz(0.35, 90);
+  } else if (mode === 2 && ph >= 2) {
+    jets(16, true);
+    hiss(0.65, 0.55, 1450);
+    buzz(0.45, 90);
+  }
+}
+
+function finish() {
+  mode = 0;
+  nxt = n === 1 ? 2 : 1;
+  spd = 0;
+  gForce = 1.0;
+  downforceKg = 0;
+  fanActive = false;
+  thrusterAudioLevel = 0;
+  machGroup.visible = false;
+  updateStuntButtons(nxt);
+}
+
+function orient(yaw, p, r) {
+  q1.copy(yaw ? QY : q3.identity());
+  q1.multiply(q2.setFromAxisAngle(X, p)).multiply(q3.setFromAxisAngle(Z, r));
+  rig.quaternion.copy(q1);
+  yoke.rotation.z = -Math.sin(r) * 0.35;
+}
+
+function run(dt) {
+  const P = rig.position;
+
+  if (n === 1) {
+    // DEMO 01: 170° Curved Arch Climb (up to 21m / 68ft with 4,700kg 2G suction fan), release, mid-air 180° roll & 3.3G cold-gas thruster landing
+    const maxTh = (170 * PI) / 180;
+    if (ph === 0) {
+      fanActive = true;
+      thrusterAudioLevel = 0;
+      v = Math.min(28, v + 19 * dt);
+      s += v * dt;
+      P.set(0, H, 8 - s);
+      spd = v;
+      downforceKg = Math.min(4700, 1200 + s * 115);
+      gForce = 1.4 + (v / 28) * 0.6;
+      pitchDeg = 0;
+      rollDeg = 0;
+      if (8 - s <= L0) {
+        ph = 1;
+        th = 0;
+      }
+    } else if (ph === 1) {
+      fanActive = true;
+      thrusterAudioLevel = 0;
+      th += (v / R) * dt;
+      P.set(0, H + R * (1 - Math.cos(th)), L0 - R * Math.sin(th));
+      rig.quaternion.setFromAxisAngle(X, th);
+      spd = v;
+      altMeters = Math.max(0, P.y - H);
+      pitchDeg = (th * 180) / PI;
+      downforceKg = 4700;
+      gForce = 2.0;
+      puff(0, -0.6, 0.8, 0, -0.3, 1, 2, 5);
+      if (th >= maxTh) {
+        ph = 2;
+        vel.set(0, 1.5, 22);
+        tf = 0;
+        fanActive = false;
+        landingBurnSoundPlayed = false;
+        machGroup.visible = true;
+        thrusterAudioLevel = 0.65;
+        jets(45, true);
+        // Cold-gas release & attitude roll initiation blast
+        hiss(0.85, 0.9, 1300);
+        buzz(0.95, 320);
+      }
+    } else if (ph === 2) {
+      // Release from 21m inverted -> 180° barrel roll recovery + 3.3G cold-gas thruster braking before landing
+      tf += dt;
+      const T = 1.85;
+      vel.y -= G * dt;
+      const brakingZone = P.y < H + 9.5 && vel.y < 0;
+      if (brakingZone) {
+        if (!landingBurnSoundPlayed) {
+          landingBurnSoundPlayed = true;
+          // Explicit SpaceX cold-gas landing burn roar as downward thrusters arrest the descent!
+          hiss(0.95, 1.05, 1050);
+          buzz(0.85, 280);
+        }
+        vel.y += (-2.1 - vel.y) * Math.min(1, 5.4 * dt);
+        gForce = 3.3;
+        thrusterAudioLevel = 1.0;
+        jets(10, true);
+      } else {
+        gForce = 0.4 + ease(tf / T) * 1.2;
+        thrusterAudioLevel = 0.55;
+        jets(4, false);
+      }
+      P.addScaledVector(vel, dt);
+      altMeters = Math.max(0, P.y - H);
+      copvPsi = Math.max(3100, 5500 - tf * 1150);
+      downforceKg = 350;
+      const hs = Math.abs(vel.z);
+      let p = Math.atan2(vel.y, hs);
+      if (P.y < H + 5) p *= Math.max(0, (P.y - H) / 5);
+      const curRoll = PI * (1 - ease(tf / T));
+      orient(1, p, curRoll);
+      pitchDeg = (p * 180) / PI;
+      rollDeg = (curRoll * 180) / PI;
+      spd = vel.length();
+      if (P.y <= H) {
+        P.y = H;
+        vel.y = 0;
+        ph = 3;
+        machGroup.visible = false;
+        thrusterAudioLevel = 0.35;
+        puff(0, -0.8, 0, 0, 0.45, 0, 85, 7.0);
+        jets(36, false);
+        // Touchdown cold-gas cushion blast
+        hiss(1.0, 1.15, 920);
+        buzz(1.0, 380);
+      }
+    } else {
+      vel.z *= Math.pow(0.28, dt);
+      P.z += vel.z * dt;
+      spd = Math.abs(vel.z);
+      altMeters = 0;
+      pitchDeg = 0;
+      rollDeg = 0;
+      gForce = 1.2;
+      thrusterAudioLevel = Math.max(0, thrusterAudioLevel - dt * 1.2);
+      copvPsi = Math.min(5500, copvPsi + 900 * dt);
+      orient(1, 0, 0);
+      if (spd < 1.8) finish();
+    }
+  } else {
+    // DEMO 02: Pure Cold-Gas Thruster Lift-Off from flat asphalt (NO RAMP), 360° thruster-driven kickflip over 5 Teslas, and cold-gas thruster landing
+    if (ph === 0) {
+      fanActive = true;
+      thrusterAudioLevel = 0;
+      v = Math.min(27, v + 18 * dt);
+      s += v * dt;
+      P.set(40, H, 18 - s);
+      spd = v;
+      gForce = 1.6;
+      downforceKg = 2200;
+      // At z = -25 (flush blue line before Model 3 at z = -40), fire bottom cold-gas thrusters to lift off directly from flat ground!
+      if (P.z <= -25) {
+        ph = 2;
+        tf = 0;
+        fanActive = false;
+        landingBurnSoundPlayed = false;
+        rollBurstSoundPlayed = false;
+        // Upward cold-gas thruster liftoff velocity clearing the 4.11m (13.5-ft) Semi at ~8.5m altitude
+        vel.set(0, 13.0, -27.5);
+        machGroup.visible = true;
+        thrusterAudioLevel = 1.0;
+        puff(0, -0.85, 0, 0, 0.5, 0, 90, 8.0);
+        jets(65, true);
+        // Powerful Cold-Gas Thruster Take-Off Sound!
+        hiss(1.0, 1.15, 1350);
+        buzz(1.0, 350);
+      }
+    } else if (ph === 2) {
+      tf += dt;
+      const T = 2.45;
+      vel.y -= G * dt;
+
+      // Attitude control thruster burst sound as the 360° mid-air rotation whips over the Tesla Semi
+      if (!rollBurstSoundPlayed && tf > 0.45) {
+        rollBurstSoundPlayed = true;
+        hiss(0.8, 0.75, 1550);
+        buzz(0.65, 180);
+      }
+
+      const braking = P.y < H + 8.5 && vel.y < 0;
+      if (braking) {
+        if (!landingBurnSoundPlayed) {
+          landingBurnSoundPlayed = true;
+          // Powerful Cold-Gas Thruster Landing Burn Sound before touchdown!
+          hiss(0.95, 1.05, 1050);
+          buzz(0.85, 280);
+        }
+        vel.y += (-2.2 - vel.y) * Math.min(1, 5.2 * dt);
+        gForce = 3.2;
+        thrusterAudioLevel = 1.0;
+        jets(10, true);
+      } else {
+        gForce = 1.7;
+        thrusterAudioLevel = 0.75;
+        jets(5, true);
+      }
+      P.addScaledVector(vel, dt);
+      altMeters = Math.max(0, P.y - H);
+      copvPsi = Math.max(2700, 5500 - tf * 1100);
+      const hs = Math.abs(vel.z);
+      let p = Math.atan2(vel.y, hs);
+      if (P.y < H + 4.5) p *= Math.max(0, (P.y - H) / 4.5);
+      // Full 360° mid-air kickflip driven by lateral cold-gas attitude thrusters
+      const rollAngle = 2 * PI * ease(tf / T);
+      orient(0, p, rollAngle);
+      pitchDeg = (p * 180) / PI;
+      rollDeg = (rollAngle * 180) / PI;
+      spd = vel.length();
+      if (P.y <= H) {
+        P.y = H;
+        vel.y = 0;
+        ph = 3;
+        machGroup.visible = false;
+        thrusterAudioLevel = 0.35;
+        puff(0, -0.8, 0, 0, 0.5, 0, 90, 7.0);
+        jets(38, false);
+        // Touchdown Cold-Gas Thruster Blast Sound!
+        hiss(1.0, 1.15, 920);
+        buzz(1.0, 380);
+      }
+    } else {
+      vel.z *= Math.pow(0.28, dt);
+      P.z += vel.z * dt;
+      spd = Math.abs(vel.z);
+      altMeters = 0;
+      pitchDeg = 0;
+      rollDeg = 0;
+      gForce = 1.1;
+      thrusterAudioLevel = Math.max(0, thrusterAudioLevel - dt * 1.2);
+      copvPsi = Math.min(5500, copvPsi + 900 * dt);
+      orient(0, 0, 0);
+      if (spd < 1.8) finish();
+    }
+  }
+
+  rearWingGroup.rotation.x = mode === 2 && ph === 3 ? 0.45 : mode === 2 ? 0.22 : 0.05;
+}
+
+const lbl = () =>
+  mode === 0
+    ? ['PULL TRIGGER / SPACE', names[nxt]]
+    : mode === 1
+    ? [`LAUNCH IN ${Math.ceil(cd)}`, names[n]]
+    : [
+        n === 1
+          ? ['2G SUCTION ACCEL', '170° WALL CLIMB · 4,700 KG', landingBurnSoundPlayed ? 'COLD-GAS LANDING BURN' : 'MID-AIR THRUSTER ROLL', '3.3G THRUSTER TOUCHDOWN'][ph]
+          : ['APPROACHING FLEET', 'COPV LIFT-OFF', landingBurnSoundPlayed ? 'COLD-GAS LANDING BURN' : 'THRUSTER LIFT & 360° KICKFLIP', 'THRUSTER TOUCHDOWN'][ph],
+        lab[n]
+      ];
+
+// ---------- Main Render Loop ----------
+let last = performance.now(), hf = 0;
+function frame() {
+  const now = performance.now(), dt = Math.min(0.05, (now - last) / 1000);
+  last = now;
+
+  if (mode === 1) {
+    cd -= dt;
+    fanActive = true;
+    downforceKg = Math.round((2.6 - cd) * 1400);
+    if (cd <= 0) {
+      mode = 2;
+      ph = 0;
+      hiss(0.55, 0.55, 1400);
+    }
+  } else if (mode === 2) {
+    run(dt);
+  }
+
+  if (machGroup.visible) {
+    const pulse = 0.9 + Math.sin(now * 0.045) * 0.18;
+    for (const mc of machCones) mc.scale.set(1, 1, pulse);
+  }
+
+  for (let i = 0; i < N; i++) {
+    if (pl[i] > 0) {
+      pl[i] -= dt * 0.92;
+      const k = Math.max(0, pl[i]);
+      pp[i * 3] += pv[i * 3] * dt;
+      pp[i * 3 + 1] += pv[i * 3 + 1] * dt;
+      pp[i * 3 + 2] += pv[i * 3 + 2] * dt;
+      pv[i * 3] *= 0.95;
+      pv[i * 3 + 1] *= 0.95;
+      pv[i * 3 + 2] *= 0.95;
+      pc[i * 3] = k * 0.82;
+      pc[i * 3 + 1] = k * 0.94;
+      pc[i * 3 + 2] = k;
+    } else {
+      pc[i * 3] = pc[i * 3 + 1] = pc[i * 3 + 2] = 0;
+    }
+  }
+
+  // Comfort vignette on rapid angular velocity
+  {
+    const a = rig.quaternion.angleTo(pq);
+    pq.copy(rig.quaternion);
+    const r = a / Math.max(dt, 0.001), m = vig.material;
+    m.opacity += ((comf && mode === 2 ? Math.min(0.68, r / 4.2) : 0) - m.opacity) * Math.min(1, 8 * dt);
+  }
+
+  // Ground cold-gas shock blast ring beneath the car during flight
+  {
+    const h = Math.max(0, rig.position.y - H), on = mode === 2 && ph >= 2;
+    bs.position.x = rig.position.x;
+    bs.position.z = rig.position.z;
+    bs.scale.setScalar(2.8 + h * 0.18);
+    bs.material.opacity = on ? Math.max(0, 0.65 - h * 0.022) : 0;
+  }
+
+  pg.attributes.position.needsUpdate = pg.attributes.color.needsUpdate = true;
+
+  // Update synthesized audio (EV motor + 2G suction fan + continuous SpaceX cold-gas thruster jet roar)
+  if (AC && !muted) {
+    mo.frequency.value = 75 + spd * 6.8;
+    mg.gain.value = mode === 2 && ph < 2 ? 0.055 : 0.014;
+    fanOsc.frequency.value = fanActive ? 520 + downforceKg * 0.08 : 220;
+    fanGain.gain.value = fanActive ? 0.04 : 0.0;
+    coldGasLoopGain.gain.value = thrusterAudioLevel * 0.28;
+    coldGasWhistle.frequency.value = 1800 + thrusterAudioLevel * 450;
+    coldGasWhistleGain.gain.value = thrusterAudioLevel * 0.035;
+  } else if (AC && muted) {
+    mg.gain.value = 0;
+    fanGain.gain.value = 0;
+    coldGasLoopGain.gain.value = 0;
+    coldGasWhistleGain.gain.value = 0;
+  }
+
+  if ((hf += dt) > 0.06) {
+    hf = 0;
+    const l = lbl();
+    updateCockpitScreens(l[0], l[1]);
+  }
+
+  if (!ren.xr.isPresenting) {
+    tip.textContent =
+      mode === 0
+        ? `READY: ${names[nxt]} · Press SPACE or LAUNCH STUNT · Drag to look around cockpit`
+        : `${names[n]} · Press SPACE mid-air for manual SpaceX cold-gas burst`;
+  }
+
+  ren.render(scene, cam);
+}
+
+positionAtStart(1);
+updateCockpitScreens('PULL TRIGGER / SPACE', names[1]);
+ren.setAnimationLoop(frame);
+
+// ---------- Inputs, Camera Modes, & UI Controls ----------
+for (const i of [0, 1]) ren.xr.getController(i).addEventListener('selectstart', trig);
+
+let camMode = 0;
+const camModes = [
+  { name: 'CAM: COCKPIT SEAT', pos: [0, 0, 0] },
+  { name: 'CAM: HOOD AERO', pos: [0.38, -0.12, -1.55] },
+  { name: 'CAM: CHASE VIEW', pos: [0.38, 1.35, 4.6] }
+];
+function cycleCamera() {
+  camMode = (camMode + 1) % camModes.length;
+  const cm = camModes[camMode];
+  camMount.position.set(cm.pos[0], cm.pos[1], cm.pos[2]);
+  document.getElementById('camBtn').textContent = cm.name;
+}
+
+addEventListener('keydown', e => {
+  if (e.code === 'Space') {
+    e.preventDefault();
+    trig();
+  } else if (e.code === 'KeyC') {
+    cycleCamera();
+  } else if (e.code === 'Digit1') {
+    selectStunt(1);
+  } else if (e.code === 'Digit2') {
+    selectStunt(2);
+  }
+});
+
+let yaw = 0, pit = 0, dn = false, moved = false;
+ren.domElement.addEventListener('pointerdown', () => {
+  dn = true;
+  moved = false;
+});
+addEventListener('pointerup', e => {
+  if (dn && !moved && e.target === ren.domElement && document.getElementById('ui').style.display === 'none') {
+    trig();
+  }
+  dn = false;
+});
+addEventListener('pointermove', e => {
+  if (dn && !ren.xr.isPresenting) {
+    if (Math.abs(e.movementX) + Math.abs(e.movementY) > 2) moved = true;
+    yaw -= e.movementX * 0.004;
+    pit = Math.max(-1.2, Math.min(1.2, pit - e.movementY * 0.004));
+    cam.rotation.set(pit, yaw, 0, 'YXZ');
+  }
+});
+
+addEventListener('resize', () => {
+  cam.aspect = innerWidth / innerHeight;
+  cam.updateProjectionMatrix();
+  ren.setSize(innerWidth, innerHeight);
+});
+
+const ui = document.getElementById('ui'), vrb = document.getElementById('vrb');
+document.getElementById('go').addEventListener('click', () => {
+  audio();
+  ui.style.display = 'none';
+});
+document.getElementById('menuBtn').addEventListener('click', () => {
+  ui.style.display = ui.style.display === 'none' ? '' : 'none';
+});
+document.getElementById('launchBtn').addEventListener('click', () => {
+  ui.style.display = 'none';
+  trig();
+});
+document.getElementById('camBtn').addEventListener('click', cycleCamera);
+
+document.getElementById('timeBtn').addEventListener('click', e => {
+  isNight = !isNight;
+  dome.material.map = makeSkyTexture(isNight);
+  dome.material.needsUpdate = true;
+  scene.fog.color.setHex(isNight ? 0x0b101b : 0xb89c7d);
+  sun.intensity = isNight ? 1.65 : 2.3;
+  sun.color.setHex(isNight ? 0xdbeafe : 0xffe4b5);
+  e.target.textContent = isNight ? 'TIME: MCGREGOR NIGHT' : 'TIME: TEXAS DUSK';
+});
+
+document.getElementById('muteBtn').addEventListener('click', e => {
+  muted = !muted;
+  e.target.textContent = 'AUDIO: ' + (muted ? 'MUTED' : 'ON');
+});
+
+document.getElementById('stunt1Btn').addEventListener('click', () => selectStunt(1));
+document.getElementById('stunt2Btn').addEventListener('click', () => selectStunt(2));
+document.getElementById('card1').addEventListener('click', () => selectStunt(1));
+document.getElementById('card2').addEventListener('click', () => selectStunt(2));
+
+if (navigator.xr) {
+  navigator.xr
+    .isSessionSupported('immersive-vr')
+    .then(ok => {
+      vrb.disabled = !ok;
+      vrb.textContent = ok ? 'ENTER VR HEADSET' : 'VR NOT AVAILABLE';
+    })
+    .catch(() => {
+      vrb.textContent = 'VR NOT AVAILABLE';
+    });
+} else {
+  vrb.textContent = 'VR NOT AVAILABLE';
+}
+
+vrb.addEventListener('click', async () => {
+  audio();
+  try {
+    const se = await navigator.xr.requestSession('immersive-vr', { optionalFeatures: ['local-floor'] });
+    ren.xr.setSession(se);
+    ui.style.display = 'none';
+    se.addEventListener('end', () => (ui.style.display = ''));
+  } catch (e) {
+    vrb.textContent = 'VR BLOCKED – USE QUEST BROWSER';
+  }
+});
+
+document.getElementById('cf').addEventListener('click', e => {
+  comf = !comf;
+  e.target.textContent = 'COMFORT VIGNETTE: ' + (comf ? 'ON' : 'OFF');
+});
+</script>
+</body>
+</html>
