@@ -819,9 +819,16 @@ const carbonTex = tex(64, 64, (g, w, h) => {
 carbonTex.repeat.set(8, 8);
 
 const bodyPaint = new THREE.MeshPhysicalMaterial({
-  color: 0xc8102e,
-  metalness: 0.78,
-  roughness: 0.2,
+  color: 0x0b0d10,
+  metalness: 0.6,
+  roughness: 0.25,
+  clearcoat: 1.0,
+  clearcoatRoughness: 0.03
+});
+const blackPaint = new THREE.MeshPhysicalMaterial({
+  color: 0xf4f7fa,
+  metalness: 0.35,
+  roughness: 0.22,
   clearcoat: 1.0,
   clearcoatRoughness: 0.03
 });
@@ -849,7 +856,7 @@ B(2.08, 0.05, 0.05, carbonMat, 0, 0.41, 0.1, car);
 for (const sx of [-1, 1]) {
   const ap = B(0.055, 0.64, 0.055, carbonMat, sx * 0.93, 0.02, -0.75, car);
   ap.rotation.x = -0.9;
-  B(0.09, 0.54, 1.55, bodyPaint, sx * 1.02, -0.3, 0.28, car);
+  B(0.09, 0.54, 1.55, blackPaint, sx * 1.02, -0.3, 0.28, car);
   B(0.06, 0.14, 1.45, ultraWhiteMat, sx * 0.96, -0.22, 0.28, car);
   B(0.19, 0.09, 0.22, carbonMat, sx * 1.12, -0.05, -0.84, car);
   // Fixed Moulded Seat Shell
@@ -878,7 +885,7 @@ for (const sx of [-0.42, 0.42]) {
 const rearWingGroup = new THREE.Group();
 rearWingGroup.position.set(0, -0.02, 1.55);
 car.add(rearWingGroup);
-B(1.76, 0.035, 0.34, carbonMat, 0, 0.16, 0, rearWingGroup);
+B(1.76, 0.035, 0.34, ultraWhiteMat, 0, 0.16, 0, rearWingGroup);
 B(0.04, 0.2, 0.22, titaniumTrim, -0.62, 0.06, 0.04, rearWingGroup);
 B(0.04, 0.2, 0.22, titaniumTrim, 0.62, 0.06, 0.04, rearWingGroup);
 
